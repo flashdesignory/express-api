@@ -1,0 +1,19 @@
+{
+    "dogs": [
+        {
+            "id": "0",
+            "name": "fifi",
+            "owner": "nikki"
+        },
+        {
+            "id": "1",
+            "name": "woof",
+            "owner": "crystal"
+        },
+        {
+            "id": "2",
+            "name": "moe",
+            "owner": "six"
+        }
+    ]
+}

@@ -2,32 +2,37 @@ import Model from './user.model';
 
 const Controller = {
   findOne(req, res, next, id){
-		req.user = Model.findOne(id);
-    if(!req.user || req.user.length === 0){
-      next(new Error('No user with that id'));
-    } else {
-      next();
-    }
+    Model.findOne(id)
+      .then((result)=>{
+        req.user = result;
+        if(!req.user || req.user.length === 0){
+          next(new Error('No user with that id'));
+        }else{
+          next();
+        }
+      });
 	},
   getAll(req, res, next){
-    let users = Model.getAll();
-    if(!users || users.length === 0){
-      next(new Error('No users exist'));
-    }else{
-      res.json(users);
-    }
+    Model.getAll()
+      .then((result) => res.json(result));
 	},
   getOne(req, res, next){
-		res.json(req.user);
-	},
+    res.json(req.user);
+  },
   createOne(req, res, next){
-		res.json(Model.createOne(req.body));
+    Model.getAll()
+      .then((result) =>  Model.createOne(result, req.body))
+      .then((result) => res.json(result));
 	},
   updateOne(req, res, next){
-		res.json(Model.updateOne(req.params.id, req.body));
+    Model.getAll()
+      .then((result) => Model.updateOne(result, req.params.id, req.body))
+      .then((result) => res.json(result));
 	},
   deleteOne(req, res, next){
-		res.json(Model.deleteOne(req.params.id));
+    Model.getAll()
+      .then((result) => Model.deleteOne(result, req.params.id))
+      .then((result) => res.json(result));
 	}
 }
 

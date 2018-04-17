@@ -1,49 +1,82 @@
 import createUniqueId from '../utils/utils.js';
 
-var users =  [
-    {
-      "id":"0",
-      "first_name":"joe",
-      "last_name": "doe",
-    },
-    {
-      "id":"1",
-      "first_name":"steve",
-      "last_name": "smith",
-    },
-    {
-      "id":"2",
-      "first_name":"tom",
-      "last_name": "doodle",
-    }
-  ];
+import fs from 'fs';
+import path from 'path';
+const url = path.join(__dirname, '../../data/user.data.json');
 
 const Model = {
   findOne(id) {
-    return users.filter((user) => user.id === id);
+    return new Promise((resolve, reject)=> {
+      fs.readFile(url, 'utf8', (error, result) => {
+        if(error){
+          reject(error);
+        }else{
+          let data = JSON.parse(result);
+          let user = data.users.filter((user) => user.id === id);
+          resolve(user)
+        }
+      })
+    })
   },
   getAll() {
-    return users;
+    return new Promise((resolve, reject)=> {
+      fs.readFile(url, 'utf8', (error, result) => {
+        if(error){
+          reject(error);
+        }else{
+          let data = JSON.parse(result);
+          resolve(data.users)
+        }
+      })
+    })
   },
-  createOne(value) {
+  createOne(newUsers, newUser) {
     let id = createUniqueId();
-    users.push({...value, id});
-    return users;
+    newUsers.push({...newUser, id});
+    let newData = {"users":newUsers};
+    return new Promise((resolve, reject)=> {
+      fs.writeFile(url, JSON.stringify(newData, null, 4), (error, result) => {
+        if(error){
+          reject(error);
+        }else{
+          resolve(newUsers)
+        }
+      });
+    });
   },
   getOne(id) {
     return users.filter((user) => user.id === id);
   },
-  updateOne(id,value) {
-    users = users.map((user) => {
+  updateOne(oldUsers,id,value) {
+    const newUsers = oldUsers.map((user) => {
       if(user.id === id){
         user = {...user, ...value}
       }
       return user;
+    })
+    let newData = {"users":newUsers};
+    return new Promise((resolve, reject)=> {
+      fs.writeFile(url, JSON.stringify(newData, null, 4), (error, result) => {
+        if(error){
+          reject(error);
+        }else{
+          resolve(newUsers)
+        }
+      });
     });
-    return users;
   },
-  deleteOne(id) {
-    return users = users.filter((user) => user.id !== id);
+  deleteOne(oldUsers, id) {
+    let newUsers = oldUsers.filter((user) => user.id !== id);
+    let newData = {"users":newUsers};
+    return new Promise((resolve, reject)=> {
+      fs.writeFile(url, JSON.stringify(newData, null, 4), (error, result) => {
+        if(error){
+          reject(error);
+        }else{
+          resolve(newUsers)
+        }
+      });
+    });
   }
 }
 
