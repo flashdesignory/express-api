@@ -24,7 +24,7 @@ function getExternalIp(){
 }
 
 const host = getExternalIp();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 server.listen(port, host,  () => {
 
@@ -38,7 +38,7 @@ server.listen(port, host,  () => {
 	console.log(chalk.green("*******************************************"));
 	console.log();
 
-	open(url);
+	if(process.env.MODE === "development") open(url);
 })
 
 if (module.hot) {

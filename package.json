@@ -8,8 +8,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "dev": "webpack",
-    "build": "webpack --p"
+    "start": "node public/server",
+    "dev": "webpack -d --config ./webpack.config.js --progress",
+    "postinstall": "webpack -p --config ./webpack.prod.config.js --progress"
   },
   "keywords": [],
   "author": "",

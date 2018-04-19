@@ -35,13 +35,18 @@ module.exports = {
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
   new webpack.DefinePlugin({
-    'process.env': { BUILD_TARGET: JSON.stringify('server') }
+    'process.env': {
+      BUILD_TARGET: JSON.stringify('server'),
+      MODE: JSON.stringify('development'),
+      BABEL_ENV: JSON.stringify('development'),
+      NODE_ENV: JSON.stringify('development')
+    }
   }),
   new webpack.BannerPlugin({ banner: 'require("source-map-support").install();', raw: true, entryOnly: false })
   ],
   mode: 'development',
-  output: { 
-    path: path.join(__dirname, 'public'), 
+  output: {
+    path: path.join(__dirname, 'public'),
     filename: 'server.js',
       publicPath: '/public/'/*,
       hotUpdateChunkFilename: 'hot/hot-update.js',
