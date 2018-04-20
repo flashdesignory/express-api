@@ -31,14 +31,14 @@ module.exports = {
   new webpack.NamedModulesPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
-  new webpack.DefinePlugin({
-    'process.env': { 
+  /*new webpack.DefinePlugin({
+    'process.env': {
       BUILD_TARGET: JSON.stringify('server'),
       MODE: JSON.stringify('production'),
       BABEL_ENV: JSON.stringify('production'),
       NODE_ENV: JSON.stringify('production')
     }
-  }),
+  }),*/
   new webpack.BannerPlugin({ banner: 'require("source-map-support").install();', raw: true, entryOnly: false })
   ],
   mode: 'development',
