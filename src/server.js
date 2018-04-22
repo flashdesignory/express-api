@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import path from 'path';
 import indexRoute from './api/index';
 import userRoute from './api/user/user.route';
@@ -8,6 +9,9 @@ const app = express();
 
 //local vars
 app.locals.title = 'express server';
+
+//alllow access to api
+app.use(cors())
 
 //parse json payloads
 app.use(express.json());
