@@ -6,12 +6,12 @@ const router = express.Router();
 router.param('id', Controller.findOne);
 
 router.route('/')
-	.get(Controller.getAll)
-	.post(Controller.createOne);
+  .get(Controller.getAll)
+  .post(Controller.createOne);
 
 router.route('/:id')
-	.get(Controller.getOne)
-	.put(Controller.updateOne)
-	.delete(Controller.deleteOne);
+  .get(Controller.getOne)
+  .put(Controller.updateOne)
+  .delete(Controller.deleteOne);
 
 export default router;
