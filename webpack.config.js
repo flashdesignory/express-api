@@ -3,6 +3,8 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const StartServerPlugin = require('start-server-webpack-plugin');
 
+require('dotenv').config();
+
 module.exports = {
   entry: ['webpack/hot/poll?1000', './src/index'],
   watch: true,
@@ -34,22 +36,27 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.DefinePlugin({
+    /* new webpack.DefinePlugin({
       'process.env': {
         BUILD_TARGET: JSON.stringify('server'),
         MODE: JSON.stringify('development'),
         BABEL_ENV: JSON.stringify('development'),
         NODE_ENV: JSON.stringify('development'),
       },
+    }), */
+    new webpack.BannerPlugin({
+      banner: 'require("source-map-support").install();',
+      raw: true,
+      entryOnly: false,
     }),
-    new webpack.BannerPlugin({ banner: 'require("source-map-support").install();', raw: true, entryOnly: false }),
   ],
   mode: 'development',
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'server.js',
-    publicPath: '/public/', /* ,
+    publicPath:
+      '/public/' /* ,
       hotUpdateChunkFilename: 'hot/hot-update.js',
-      hotUpdateMainFilename: 'hot/hot-update.json' */
+      hotUpdateMainFilename: 'hot/hot-update.json' */,
   },
 };

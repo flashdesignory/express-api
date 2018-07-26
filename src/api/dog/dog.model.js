@@ -1,9 +1,10 @@
-
 import fs from 'fs';
 import path from 'path';
 import createUniqueId from '../utils/utils';
 
-const url = path.join(__dirname, '../../data/dog.data.json');
+const url = process.env.DATA_URL
+  ? path.join(__dirname, process.env.DATA_URL_DOG)
+  : path.join(__dirname, '../../data/dog.data.json');
 
 const Model = {
   findOne(id) {

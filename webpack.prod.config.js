@@ -39,7 +39,11 @@ module.exports = {
       NODE_ENV: JSON.stringify('production')
     }
   }), */
-    new webpack.BannerPlugin({ banner: 'require("source-map-support").install();', raw: true, entryOnly: false }),
+    new webpack.BannerPlugin({
+      banner: 'require("source-map-support").install();',
+      raw: true,
+      entryOnly: false,
+    }),
   ],
   mode: 'development',
   output: {
