@@ -1,4 +1,4 @@
-import fs from 'fs';
+/* import fs from 'fs';
 import path from 'path';
 import createUniqueId from '../utils/utils';
 
@@ -46,9 +46,6 @@ const Model = {
       });
     });
   },
-  /* getOne(id) {
-    return users.filter(user => user.id === id);
-  }, */
   updateOne(oldUsers, id, value) {
     let result;
     const newUsers = oldUsers.map((user) => {
@@ -83,4 +80,21 @@ const Model = {
   },
 };
 
-export default Model;
+export default Model; */
+
+import mongoose from 'mongoose';
+
+const userSchema = new mongoose.Schema({
+  first_name: {
+    type: String,
+    required: [true, 'A first name is required'],
+  },
+  last_name: {
+    type: String,
+    required: [true, 'A last name is required'],
+  },
+});
+
+const User = mongoose.model('user', userSchema);
+
+export default User;

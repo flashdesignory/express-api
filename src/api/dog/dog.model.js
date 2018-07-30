@@ -1,4 +1,4 @@
-import fs from 'fs';
+/* import fs from 'fs';
 import path from 'path';
 import createUniqueId from '../utils/utils';
 
@@ -46,9 +46,6 @@ const Model = {
       });
     });
   },
-  /* getOne(id) {
-    return dogs.filter(dog => dog.id === id);
-  }, */
   updateOne(oldDogs, id, value) {
     let result;
     const newDogs = oldDogs.map((dog) => {
@@ -82,5 +79,22 @@ const Model = {
     });
   },
 };
+
+export default Model; */
+
+import mongoose from 'mongoose';
+
+const dogSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, 'A name is required'],
+  },
+  owner: {
+    type: String,
+    required: [true, 'An owner is required'],
+  },
+});
+
+const Model = mongoose.model('dog', dogSchema);
 
 export default Model;
