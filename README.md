@@ -1,8 +1,10 @@
 # express-api
+
 Starter Project - with webpack and HMR
 
-## external json version
-simple external data file
+## mongodb version
+
+work in progress
 
 Heroku test:
 https://express-api-json.herokuapp.com/
