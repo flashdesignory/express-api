@@ -7,4 +7,4 @@ Starter Project - with webpack and HMR
 work in progress
 
 Heroku test:
-https://express-api-json.herokuapp.com/
+https://express-api-mongo.herokuapp.com
