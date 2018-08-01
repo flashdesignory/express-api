@@ -46,9 +46,9 @@ app.use('/dog', dogRoute);
 app.use('*', indexRoute); // catch all
 
 // global error handler
-app.use((err, req, res /* , next */) => {
-  // console.log(err.stack);
+/*app.use((err, req, res ) => {
+  console.log(err.stack);
   res.status(500).send(`error: ${err.message}`);
-});
+}); */
 
 export default app;
