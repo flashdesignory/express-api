@@ -1,5 +1,5 @@
 import express from 'express';
-// import cors from 'cors';
+import cors from 'cors';
 import path from 'path';
 import indexRoute from './api/index';
 import userRoute from './api/user/user.route';
@@ -13,7 +13,7 @@ const app = express();
 app.locals.title = 'express server';
 
 // alllow access to api
-// app.use(cors())
+app.use(cors());
 
 // add addMiddleware
 addMiddleware(app);
@@ -46,7 +46,7 @@ app.use('/dog', dogRoute);
 app.use('*', indexRoute); // catch all
 
 // global error handler
-/*app.use((err, req, res ) => {
+/* app.use((err, req, res ) => {
   console.log(err.stack);
   res.status(500).send(`error: ${err.message}`);
 }); */
