@@ -2,10 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import indexRoute from './api/index';
+import signinRoute from './api/auth/auth.route';
 import userRoute from './api/user/user.route';
 import dogRoute from './api/dog/dog.route';
 import addMiddleware from './middleware';
 import connect from './db';
+import { protect } from './api/auth/auth';
 
 const app = express();
 
@@ -41,8 +43,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
 app.use('/', indexRoute);
-app.use('/user', userRoute);
-app.use('/dog', dogRoute);
+app.use('/signin', signinRoute);
+app.use('/user', protect, userRoute);
+app.use('/dog', protect, dogRoute);
 app.use('*', indexRoute); // catch all
 
 // global error handler
