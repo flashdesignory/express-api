@@ -35,7 +35,8 @@
     "start-server-webpack-plugin": "^2.2.5",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

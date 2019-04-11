@@ -1,8 +1,8 @@
 import open from 'open';
 import os from 'os';
-import chalk from 'chalk';
 import http from 'http';
 
+import logger from './utils/logger.simple';
 import app from './server';
 
 const server = http.createServer(app);
@@ -32,13 +32,9 @@ const port = process.env.PORT || 8080;
 server.listen(port, host, () => {
   var url = `http://${host}:${port}`;
 
-  console.log();
-  console.log(chalk.green('*******************************************'));
-  console.log();
-  console.log(chalk.cyan(`listening at: ${url}`));
-  console.log();
-  console.log(chalk.green('*******************************************'));
-  console.log();
+  logger.info('*******************************************');
+  logger.info(`listening at: ${url}`);
+  logger.info('*******************************************');
 
   if (process.env.MODE === 'development') open(url);
 });
